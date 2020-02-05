@@ -1,0 +1,11 @@
+server:
+  port: 8090
+    servlet:
+      contextPath: /account
+#  http://localhost:8090
+
+
+
+#server:
+#  port: 8090
+#  contextPath: /context-path
