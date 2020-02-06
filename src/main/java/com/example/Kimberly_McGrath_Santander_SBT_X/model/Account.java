@@ -12,7 +12,7 @@ import javax.persistence.Table;
 
 @Data
 @AllArgsConstructor
-@NoArgsConstructor
+//@NoArgsConstructor
 @Entity
 @Table(name="accounts")
 public class Account {
@@ -26,7 +26,7 @@ public class Account {
     @JsonProperty("phoneNumber")
     private String phoneNumber;
 
-    protected Account() {}
+    public Account() {}
 
     @Override
     public String toString() {

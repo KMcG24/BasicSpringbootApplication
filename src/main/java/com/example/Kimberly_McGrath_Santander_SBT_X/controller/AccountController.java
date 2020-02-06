@@ -1,6 +1,5 @@
 package com.example.Kimberly_McGrath_Santander_SBT_X.controller;
 
-import com.example.Kimberly_McGrath_Santander_SBT_X.model.Account;
 import com.example.Kimberly_McGrath_Santander_SBT_X.service.AccountService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -35,9 +34,9 @@ public class AccountController {
 
     @GetMapping(path = "/account/{accountId}", produces = MediaType.APPLICATION_JSON_VALUE)
     @ResponseBody
-    public ResponseEntity<Account>getAccountById(@Valid @PathVariable String accountId) throws Exception {
+    public ResponseEntity<Object> getAccountById(@Valid @PathVariable String accountId) throws Exception {
 
-        return new ResponseEntity<>(accountService.getAccountById(accountId), HttpStatus.OK);
+        return new ResponseEntity<Object>(accountService.getAccountById(accountId), HttpStatus.OK);
     }
 
 }
