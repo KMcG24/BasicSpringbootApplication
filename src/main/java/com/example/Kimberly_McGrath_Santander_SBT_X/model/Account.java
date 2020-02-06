@@ -11,10 +11,10 @@ import javax.persistence.Table;
 
 
 @Data
-@AllArgsConstructor
+//@AllArgsConstructor
 //@NoArgsConstructor
 @Entity
-@Table(name="accounts")
+@Table(name="account")
 public class Account {
     @Id
     @JsonProperty("accountId")

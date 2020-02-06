@@ -1,0 +1,7 @@
+DROP TABLE IF EXISTS account;
+
+CREATE TABLE account (
+accountId INT(4) PRIMARY KEY NOT NULL,
+lastName VARCHAR(50) NOT NULL,
+phoneNumber VARCHAR(15) NOT NULL
+);
