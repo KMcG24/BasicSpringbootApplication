@@ -43,7 +43,7 @@ public class AccountControllerTest {
         String lastName = "Jones";
         String phoneNumber = "07785746345";
 
-        when(accountService.getAccountById(accountId)).thenReturn(account);
+        when(accountService.getAccountById(accountId)).thenReturn(java.util.Optional.of(account));
 
         mockMvc.perform(
                 MockMvcRequestBuilders.get("/account/1")
