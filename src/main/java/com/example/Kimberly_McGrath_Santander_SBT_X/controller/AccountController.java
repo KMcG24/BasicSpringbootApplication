@@ -1,6 +1,7 @@
 package com.example.Kimberly_McGrath_Santander_SBT_X.controller;
 
 import com.example.Kimberly_McGrath_Santander_SBT_X.model.Account;
+import com.example.Kimberly_McGrath_Santander_SBT_X.model.AccountRequest;
 import com.example.Kimberly_McGrath_Santander_SBT_X.service.AccountService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -50,9 +51,9 @@ public class AccountController {
 
     @PatchMapping (path = "/account/{accountId}", produces = MediaType.APPLICATION_JSON_VALUE)
     @ResponseBody
-    public ResponseEntity<Account> updateAcctById(@Valid @RequestBody Account accountId) throws Exception {
-        accountService.updateAccountbyId(accountId);
-        return new ResponseEntity<Account>(accountId, HttpStatus.OK);
+    public ResponseEntity<Account> updateAcctById(@PathVariable String accountId, @Valid @RequestBody AccountRequest accountRequest) throws Exception {
+//        accountService.updateAccountbyId(accountId);
+        return new ResponseEntity<Account>(accountService.updateAccountbyId(accountId, accountRequest), HttpStatus.OK);
     }
 
 //    @DeleteMapping(path = "/account/{accountId}", produces = MediaType.APPLICATION_JSON_VALUE)
