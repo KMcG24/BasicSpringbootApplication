@@ -14,6 +14,8 @@ import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
 
+import java.util.List;
+
 import static org.mockito.Mockito.when;
 
 
@@ -33,6 +35,7 @@ public class AccountControllerTest {
 
     @Mock
     private Account account;
+    private Object List;
 
     @Test
     public void getAcctById_shouldReturnAccount() throws Exception {
@@ -51,5 +54,29 @@ public class AccountControllerTest {
                 .andExpect(MockMvcResultMatchers.status().isOk())
                 .andExpect(MockMvcResultMatchers.content().contentType(MediaType.APPLICATION_JSON));
     }
+//
+//    @Test
+//    public void getAllAccts_shouldReturnAllAccounts() throws Exception {
+//
+//        final List<Account> accountList = (List<Account>
+//        .getObjectList("api/account/accounts", Account.class));
+//
+//        final String response = "[{\"accounts\:\"accoundId"
+//    }
 
+//    @Test
+//    public void updateAcctById_shouldUpdateAccount() throws Exception {
+//
+//        Account account = new Account();
+//
+//        String accountId = "1";
+//
+//        when(accountService.updateAccountById(accountId)).thenReturn(account);
+//
+//        mockMvc.perform(
+//                MockMvcRequestBuilders.get("/account/1")
+//                        .contentType(MediaType.APPLICATION_JSON))
+//                .andExpect(MockMvcResultMatchers.status().isOk())
+//                .andExpect(MockMvcResultMatchers.content().contentType(MediaType.APPLICATION_JSON));
+//    }
 }
