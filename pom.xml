@@ -69,8 +69,6 @@
 				<groupId>org.springframework.boot</groupId>
 				<artifactId>spring-boot-maven-plugin</artifactId>
 			</plugin>
-			<!-- https://mvnrepository.com/artifact/org.projectlombok/lombok -->
-
 		</plugins>
 	</build>
 
