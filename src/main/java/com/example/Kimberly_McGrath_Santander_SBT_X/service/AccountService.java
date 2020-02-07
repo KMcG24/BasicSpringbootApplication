@@ -17,11 +17,11 @@ public class AccountService {
     @Autowired
     private AccountRepository accountRepository;
 
-    public Optional<Account> getAccountById(String accountId) throws Exception {
+    public Account getAccountById(String accountId) throws Exception {
 
-        final Optional<Account> account = getAccountById(accountId);
-        if (account != null) {
-            return accountRepository.findById(accountId);
+        Optional<Account> accountOptional = accountRepository.findById(accountId);
+        if (accountOptional.isPresent()) {
+            return accountOptional.get();
         } else {
             throw new Exception ("Account not found");
         }

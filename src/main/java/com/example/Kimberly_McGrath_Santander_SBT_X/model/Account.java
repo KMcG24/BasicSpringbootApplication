@@ -5,28 +5,29 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
 
 @Data
-//@AllArgsConstructor
-//@NoArgsConstructor
+@AllArgsConstructor
+@NoArgsConstructor
 @Entity
 @Table(name="account")
 public class Account {
     @Id
-    @JsonProperty("accountId")
+    @Column(name="account_id")
     private String accountId;
 
-    @JsonProperty("lastName")
+    @Column(name="last_name")
     private String lastName;
 
-    @JsonProperty("phoneNumber")
+    @Column(name="phone_number")
     private String phoneNumber;
 
-    public Account() {}
+//    public Account() {}
 
     @Override
     public String toString() {
