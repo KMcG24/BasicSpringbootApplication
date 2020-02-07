@@ -51,9 +51,10 @@ public class AccountController {
 
     @PatchMapping (path = "/account/{accountId}", produces = MediaType.APPLICATION_JSON_VALUE)
     @ResponseBody
-    public ResponseEntity<Account> updateAcctById(@PathVariable String accountId, @Valid @RequestBody AccountRequest accountRequest) throws Exception {
-//        accountService.updateAccountbyId(accountId);
-        return new ResponseEntity<Account>(accountService.updateAccountbyId(accountId, accountRequest), HttpStatus.OK);
+    public ResponseEntity<Account> updateAcctById(@PathVariable Account accountId,
+                                                  @Valid @RequestBody AccountRequest accountRequest) throws Exception {
+        accountService.updateAccountbyId(accountId, accountRequest);
+        return new ResponseEntity<Account>(HttpStatus.OK);
     }
 
 //    @DeleteMapping(path = "/account/{accountId}", produces = MediaType.APPLICATION_JSON_VALUE)

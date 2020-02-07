@@ -1,6 +1,7 @@
 package com.example.Kimberly_McGrath_Santander_SBT_X.service;
 
 import com.example.Kimberly_McGrath_Santander_SBT_X.model.Account;
+import com.example.Kimberly_McGrath_Santander_SBT_X.model.AccountRequest;
 import com.example.Kimberly_McGrath_Santander_SBT_X.repository.AccountRepository;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -39,7 +40,7 @@ public class AccountService {
         }
     }
 
-    public void updateAccountbyId(Account accountId) throws Exception {
+    public void updateAccountbyId(Account accountId, AccountRequest accountRequest) throws Exception {
 
         Account updatedAccount = accountRepository.save(accountId);
 
