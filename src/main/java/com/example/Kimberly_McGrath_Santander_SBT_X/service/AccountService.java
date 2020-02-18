@@ -10,10 +10,7 @@ import org.springframework.stereotype.Component;
 
 import java.lang.reflect.Array;
 import java.sql.SQLException;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-import java.util.Optional;
+import java.util.*;
 import java.util.stream.IntStream;
 
 
@@ -48,18 +45,21 @@ public class AccountService {
     public Account updateAccountbyId(Account accountId, AccountRequest accountRequest) throws Exception {
 
         ArrayList<Account> accountArrayList = (ArrayList<Account>) accountRepository.findAll();
+
         for (Account accounts : accountArrayList) {
             System.out.println(getAccounts());
         }
 
-        Account updatedAccount = accountRepository.save(accountId);
+            Account updatedAccount = accountRepository.save(accountId);
 
-        if (updatedAccount != null && !accountArrayList.contains(updatedAccount)) {
-            accountRepository.save(accountId);
-            return updatedAccount;
+            if (updatedAccount != null && !accountArrayList.contains(getAccounts())) {
+                accountRepository.save(accountId);
+                return updatedAccount;
 
-        } else {
-            throw new Exception("No account to update");
+
+            } else {
+                throw new Exception("No account to update");
+            }
         }
 
 
@@ -71,6 +71,6 @@ public class AccountService {
 //            throw new Exception("Account not found");
 //        }
 //    }
-    }
+
 }
 
