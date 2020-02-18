@@ -57,10 +57,10 @@ public class AccountController {
         return new ResponseEntity<Account>(HttpStatus.OK);
     }
 
-//    @DeleteMapping(path = "/account/{accountId}", produces = MediaType.APPLICATION_JSON_VALUE)
-//    @ResponseBody
-//    public ResponseEntity<Object> deleteAccountById (@Valid @PathVariable String accountId) throws Exception {
-//
-//        return new ResponseEntity<Object>(accountService.deleteAccountById(accountId), HttpStatus.NO_CONTENT);
-//    }
+    @DeleteMapping(path = "/account/{accountId}", produces = MediaType.APPLICATION_JSON_VALUE)
+    @ResponseBody
+    public ResponseEntity<Object> deleteAccountById (@Valid @PathVariable String accountId) throws Exception {
+
+        return new ResponseEntity<Object>(accountService.deleteAccountById(accountId), HttpStatus.NO_CONTENT);
+    }
 }

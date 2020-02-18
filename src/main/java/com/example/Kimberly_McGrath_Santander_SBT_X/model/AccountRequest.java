@@ -9,16 +9,16 @@ import javax.validation.constraints.NotNull;
 @Data
 public class AccountRequest {
 
-    @NotNull
-    @NotBlank
+//    @NotNull
+//    @NotBlank
     private String accountId;
 
-    @NotNull
-    @NotBlank
+//    @NotNull
+//    @NotBlank
     private String lastName;
 
-    @NotNull
-    @NotBlank
+//    @NotNull
+//    @NotBlank
     private String phoneNumber;
 
 }

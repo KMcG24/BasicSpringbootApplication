@@ -8,8 +8,13 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import java.lang.reflect.Array;
+import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.IntStream;
 
 
 @Component
@@ -25,39 +30,48 @@ public class AccountService {
         if (accountOptional.isPresent()) {
             return accountOptional.get();
         } else {
-            throw new Exception ("Account not found");
+            throw new Exception("Account not found");
         }
-   }
+    }
 
-    public List getAccounts() throws Exception{
+    public List getAccounts() throws Exception {
 
         List<Account> accountList = (List<Account>) accountRepository.findAll();
         if (!accountList.isEmpty()) {
             return (List) accountList;
 
         } else {
-            throw new Exception ("There are no existing accounts");
+            throw new Exception("There are no existing accounts");
         }
     }
 
-    public void updateAccountbyId(Account accountId, AccountRequest accountRequest) throws Exception {
+    public Account updateAccountbyId(Account accountId, AccountRequest accountRequest) throws Exception {
+
+        ArrayList<Account> accountArrayList = (ArrayList<Account>) accountRepository.findAll();
+        for (Account accounts : accountArrayList) {
+            System.out.println(getAccounts());
+        }
 
         Account updatedAccount = accountRepository.save(accountId);
 
-        if (updatedAccount != null) {
+        if (updatedAccount != null && !accountArrayList.contains(updatedAccount)) {
             accountRepository.save(accountId);
+            return updatedAccount;
+
         } else {
             throw new Exception("No account to update");
         }
-    }
 
-//    public Account deleteAccountById(String accountId) throws Exception {
+
+
+
+//    public void deleteAccountById(String accountId) throws Exception {
+//        Account deleteAccount = accountRepository.deleteById(String accountId);
+//        if (deleteAccount.isPresent()) {
 //
-//        void <Account> account = accountRepository.deleteById(accountId);
-//        if (account!=null) {
-//            return account;
 //        } else {
-//            throw new Exception ("Account not found");
+//            throw new Exception("Account not found");
 //        }
-    }
+//    }
+}
 

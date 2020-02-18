@@ -1,6 +1,7 @@
 package com.example.Kimberly_McGrath_Santander_SBT_X.controller;
 
 import com.example.Kimberly_McGrath_Santander_SBT_X.model.Account;
+import com.example.Kimberly_McGrath_Santander_SBT_X.model.AccountRequest;
 import com.example.Kimberly_McGrath_Santander_SBT_X.service.AccountService;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -54,7 +55,7 @@ public class AccountControllerTest {
                 .andExpect(MockMvcResultMatchers.status().isOk())
                 .andExpect(MockMvcResultMatchers.content().contentType(MediaType.APPLICATION_JSON));
     }
-//
+
 //    @Test
 //    public void getAllAccts_shouldReturnAllAccounts() throws Exception {
 //
@@ -63,15 +64,16 @@ public class AccountControllerTest {
 //
 //        final String response = "[{\"accounts\:\"accoundId"
 //    }
-
+//
 //    @Test
 //    public void updateAcctById_shouldUpdateAccount() throws Exception {
 //
 //        Account account = new Account();
 //
 //        String accountId = "1";
+//        AccountRequest accountRequest = null;
 //
-//        when(accountService.updateAccountById(accountId)).thenReturn(account);
+//        when(accountService.updateAccountbyId(accountId, accountRequest)).thenReturn(account);
 //
 //        mockMvc.perform(
 //                MockMvcRequestBuilders.get("/account/1")
