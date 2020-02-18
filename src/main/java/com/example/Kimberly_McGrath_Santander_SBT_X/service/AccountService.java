@@ -2,18 +2,13 @@ package com.example.Kimberly_McGrath_Santander_SBT_X.service;
 
 import com.example.Kimberly_McGrath_Santander_SBT_X.model.Account;
 import com.example.Kimberly_McGrath_Santander_SBT_X.model.AccountRequest;
-import com.example.Kimberly_McGrath_Santander_SBT_X.model.DeleteAccountRequest;
 import com.example.Kimberly_McGrath_Santander_SBT_X.repository.AccountRepository;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-import javax.validation.Valid;
-import java.lang.reflect.Array;
-import java.sql.SQLException;
 import java.util.*;
-import java.util.stream.IntStream;
 
 
 @Component
@@ -44,30 +39,23 @@ public class AccountService {
         }
     }
 
-    public Account updateAccountbyId(String accountId, AccountRequest accountRequest) throws Exception {
+    public Account updateAccountbyId(Account accountId, AccountRequest accountRequest) throws Exception {
 
-        ArrayList<Account> accountArrayList = (ArrayList<Account>) accountRepository.findAll();
-        System.out.println("account arrayList:" + accountArrayList);
+//        Account existingAccount = getAccountById(accountId);
+//        if (existingAccount == null) {
+//            LOGGER.error("account {} does not exist");
+//            throw new Exception("account {} does not exist");
+//
+//        }if (existingAccount != null) {
+////                final Account updatedAccount = accountRepository.save(accountId);
+////                System.out.println("updated Account:" + updatedAccount);
+//                return accountRepository.save(accountId);
+        Account existingAccount = accountRepository.save(accountId);
+        if (existingAccount !=null) {
+            final Account updatedAccount = accountRepository.save(accountId);
+            return updatedAccount;
 
-        Account existingAccount = getAccountById(accountId);
-        if (existingAccount == null) {
-            LOGGER.error("account {} does not exist");
-            throw new Exception("account {} does not exist");
-
-
-        }if (existingAccount != null && !accountArrayList.contains(existingAccount)) {
-                Account newAccountId = new Account();
-                Account updatedAccount = accountRepository.save(newAccountId);
-                System.out.println("updated Account:" + updatedAccount);
-                return updatedAccount;
-
-
-            }
-        if (accountArrayList.contains(existingAccount)) {
-                LOGGER.error("account {} already exists, please choose another accountId");
-                throw new Exception("account {} already exists, please choose another accountId");
-            }
-        else {
+            } else {
                 throw new Exception("Error updating account");
             }
         }
