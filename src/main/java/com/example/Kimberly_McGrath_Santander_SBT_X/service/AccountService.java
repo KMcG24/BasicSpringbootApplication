@@ -50,10 +50,11 @@ public class AccountService {
 ////                final Account updatedAccount = accountRepository.save(accountId);
 ////                System.out.println("updated Account:" + updatedAccount);
 //                return accountRepository.save(accountId);
-        Account existingAccount = accountRepository.save(accountId);
-        if (existingAccount !=null) {
-            final Account updatedAccount = accountRepository.save(accountId);
-            return updatedAccount;
+
+//        TODO get accountId passed for the request
+
+        if (accountId !=null) {
+            return accountRepository.save(accountId);
 
             } else {
                 throw new Exception("Error updating account");

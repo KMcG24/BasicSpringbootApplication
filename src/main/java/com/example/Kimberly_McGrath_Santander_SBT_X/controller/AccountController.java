@@ -7,6 +7,7 @@ import com.example.Kimberly_McGrath_Santander_SBT_X.service.AccountService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
@@ -52,7 +53,8 @@ public class AccountController {
 
     @PatchMapping (path = "/account/{accountId}", produces = MediaType.APPLICATION_JSON_VALUE)
     @ResponseBody
-    public ResponseEntity<Account> updateAcctById(@PathVariable String accountId,
+    @Modifying
+    public ResponseEntity<Account> updateAcctById(@PathVariable Account accountId,
                                                   @Valid @RequestBody AccountRequest accountRequest) throws Exception {
         accountService.updateAccountbyId(accountId, accountRequest);
         return new ResponseEntity<Account>(HttpStatus.OK);
