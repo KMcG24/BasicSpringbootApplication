@@ -63,8 +63,6 @@ public class AccountService {
         }
 
 
-
-
 //    public void deleteAccountById(String accountId) throws Exception {
 //        Account deleteAccount = accountRepository.deleteById(String accountId);
 //        if (deleteAccount.isPresent()) {
@@ -73,5 +71,6 @@ public class AccountService {
 //            throw new Exception("Account not found");
 //        }
 //    }
+    }
 }
 
