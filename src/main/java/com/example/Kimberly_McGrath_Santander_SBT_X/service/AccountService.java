@@ -63,10 +63,10 @@ public class AccountService {
 
 
             }
-//        if (accountArrayList.contains(existingAccount)) {
-//                LOGGER.error("account {} already exists, please choose another accountId");
-//                throw new Exception("account {} already exists, please choose another accountId");
-//            }
+        if (accountArrayList.contains(existingAccount)) {
+                LOGGER.error("account {} already exists, please choose another accountId");
+                throw new Exception("account {} already exists, please choose another accountId");
+            }
         else {
                 throw new Exception("Error updating account");
             }
