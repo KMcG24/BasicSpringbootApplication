@@ -1,16 +1,27 @@
 package com.example.Kimberly_McGrath_Santander_SBT_X.model;
 
 
+import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
+
+import javax.persistence.Id;
 
 @Data
+//@AllArgsConstructor
+//@NoArgsConstructor
 public class AccountRequest {
 
+    @Id
     private String accountId;
 
     private String lastName;
 
     private String phoneNumber;
+
+    public AccountRequest (String accountId, String lastName, String phoneNumber) {
+
+    }
 
     public String getAccountId() {
         return accountId;

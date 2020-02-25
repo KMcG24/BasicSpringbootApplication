@@ -53,9 +53,9 @@ public class AccountController {
 
     @PatchMapping (path = "/account/update/{accountId}", produces = MediaType.APPLICATION_JSON_VALUE)
     @ResponseBody
-    public ResponseEntity<Account> updateAcctById(@PathVariable String accountId, String lastName, String phoneNumber,
+    public ResponseEntity<Account> updateAcctById(@PathVariable String accountId,
                                                   @Valid @RequestBody AccountRequest accountRequest) throws Exception {
-        accountService.updateAccountbyId(accountId, lastName, phoneNumber, accountRequest);
+        accountService.updateAccountbyId(accountId, accountRequest);
         return new ResponseEntity<Account>(HttpStatus.OK);
     }
 

@@ -43,7 +43,7 @@ public class AccountService {
         }
     }
 
-    public Account updateAccountbyId(String accountId, String lastName, String phoneNumber, AccountRequest accountRequest) throws Exception {
+    public Account updateAccountbyId(String accountId, AccountRequest accountRequest) throws Exception {
 
 
         //get account being passed
@@ -54,18 +54,16 @@ public class AccountService {
         if (existingAccount != null) {
             System.out.println("I am checking the correct accountId " + accountId);
 
-            Account account = new Account();
-//            account.getLastName();
-//            account.getPhoneNumber();
+            Account updatedAccount = new Account();
+//            accountRequest.getAccountId();
+//            accountRequest.getLastName();
+//            accountRequest.getPhoneNumber();
+//            accountRequest.setAccountId(accountId);
 
-//            account.setAccountId(accountId);
-            account.setLastName(lastName);
-            account.setPhoneNumber(phoneNumber);
-
-            Account updatedAccount = accountRepository.save(existingAccount);
+            final Account newAccount = accountRepository.save(updatedAccount);
             System.out.println("I am hitting updatedAccount " + updatedAccount);
 
-            return updatedAccount;
+            return newAccount;
 
 
         } else {
