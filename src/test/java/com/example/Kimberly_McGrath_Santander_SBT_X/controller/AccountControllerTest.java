@@ -54,23 +54,23 @@ public class AccountControllerTest {
 //    @Spy
 //    private List<Object> accountList = new List<>();
 //
-    @Test
-    public void getAcctById_shouldReturnAccount() throws Exception {
-
-        Account account = new Account();
-
-        String accountId = "1";
-        String lastName = "Jones";
-        String phoneNumber = "07785746345";
-
-        when(accountService.getAccountById(accountId)).thenReturn(account);
-
-        mockMvc.perform(
-                MockMvcRequestBuilders.get("/account/1")
-                        .contentType(MediaType.APPLICATION_JSON))
-                .andExpect(MockMvcResultMatchers.status().isOk())
-                .andExpect(MockMvcResultMatchers.content().contentType(MediaType.APPLICATION_JSON));
-    }
+//    @Test
+//    public void getAcctById_shouldReturnAccount() throws Exception {
+//
+//        Account account = new Account();
+//
+//        String accountId = "1";
+//        String lastName = "Jones";
+//        String phoneNumber = "07785746345";
+//
+//        when(accountService.getAccountById(accountId)).thenReturn(account);
+//
+//        mockMvc.perform(
+//                MockMvcRequestBuilders.get("/account/1")
+//                        .contentType(MediaType.APPLICATION_JSON))
+//                .andExpect(MockMvcResultMatchers.status().isOk())
+//                .andExpect(MockMvcResultMatchers.content().contentType(MediaType.APPLICATION_JSON));
+//    }
 //
 //    @Test
 //    public void getAllAccts_shouldReturnAllAccounts() throws Exception {

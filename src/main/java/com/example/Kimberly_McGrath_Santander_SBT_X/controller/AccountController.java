@@ -63,6 +63,7 @@ public class AccountController {
     public ResponseEntity<Object> deleteAccountById (@Valid @PathVariable String accountId,
                                                      @Valid @RequestBody DeleteAccountRequest deleteAccountRequest) throws Exception {
         accountService.deleteAccountById(accountId, deleteAccountRequest);
+        LOGGER.info("Account " + accountId + " deleted successfully");
         return new ResponseEntity<Object>(HttpStatus.NO_CONTENT);
     }
 }
