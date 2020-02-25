@@ -51,19 +51,18 @@ public class AccountController {
         return new ResponseEntity<List>(accountService.getAccounts(), HttpStatus.OK);
     }
 
-    @PatchMapping (path = "/account/{accountId}", produces = MediaType.APPLICATION_JSON_VALUE)
+    @PatchMapping (path = "/account/update/{accountId}", produces = MediaType.APPLICATION_JSON_VALUE)
     @ResponseBody
-    @Modifying
-    public ResponseEntity<Account> updateAcctById(@PathVariable Account accountId,
+    public ResponseEntity<Account> updateAcctById(@PathVariable String accountId, String lastName, String phoneNumber,
                                                   @Valid @RequestBody AccountRequest accountRequest) throws Exception {
-        accountService.updateAccountbyId(accountId, accountRequest);
+        accountService.updateAccountbyId(accountId, lastName, phoneNumber, accountRequest);
         return new ResponseEntity<Account>(HttpStatus.OK);
     }
 
-//    @DeleteMapping(path = "/account/{accountId}", produces = MediaType.APPLICATION_JSON_VALUE)
-//    public ResponseEntity<Object> deleteAccountById (@Valid @PathVariable String accountId,
-//                                                     @Valid @RequestBody DeleteAccountRequest deleteAccountRequest) throws Exception {
-//        accountService.deleteAccountById(accountId, deleteAccountRequest);
-//        return new ResponseEntity<Object>(HttpStatus.NO_CONTENT);
-//    }
+    @DeleteMapping(path = "/account/delete/{accountId}", produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<Object> deleteAccountById (@Valid @PathVariable String accountId,
+                                                     @Valid @RequestBody DeleteAccountRequest deleteAccountRequest) throws Exception {
+        accountService.deleteAccountById(accountId, deleteAccountRequest);
+        return new ResponseEntity<Object>(HttpStatus.NO_CONTENT);
+    }
 }
