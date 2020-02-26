@@ -5,7 +5,10 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import javax.persistence.FetchType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToOne;
 
 @Data
 //@AllArgsConstructor
@@ -13,7 +16,9 @@ import javax.persistence.Id;
 public class AccountRequest {
 
     @Id
-    private String accountId;
+    @OneToOne(fetch = FetchType.LAZY)
+    @JoinColumn (name = "account_id")
+    private Long accountId;
 
     private String lastName;
 
@@ -23,11 +28,11 @@ public class AccountRequest {
 
     }
 
-    public String getAccountId() {
+    public Long getAccountId() {
         return accountId;
     }
 
-    public void setAccountId (String accountId) {
+    public void setAccountId (Long accountId) {
         this.accountId = accountId;
     }
 

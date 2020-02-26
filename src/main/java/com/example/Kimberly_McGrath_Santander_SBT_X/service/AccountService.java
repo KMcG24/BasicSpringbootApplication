@@ -9,9 +9,9 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
-import sun.lwawt.macosx.CSystemTray;
 
 import javax.transaction.Transactional;
+import javax.validation.Valid;
 import java.util.*;
 
 @Service
@@ -23,7 +23,7 @@ public class AccountService {
     @Autowired
     private AccountRepository accountRepository;
 
-    public Account getAccountById(String accountId) throws Exception {
+    public Account getAccountById(Long accountId) throws Exception {
 
         Optional<Account> accountOptional = accountRepository.findById(accountId);
         if (accountOptional.isPresent()) {
@@ -44,7 +44,7 @@ public class AccountService {
         }
     }
 
-    public Account updateAccountbyId(String accountId, AccountRequest accountRequest) throws Exception {
+    public Account updateAccountbyId(Long accountId, AccountRequest accountRequest) throws Exception {
 
 //        get account being passed
             Account existingAccount = getAccountById(accountId);
@@ -74,7 +74,7 @@ public class AccountService {
         }
 
 
-    public void deleteAccountById(String accountId, DeleteAccountRequest deleteAccountRequest) throws Exception {
+    public void deleteAccountById(@Valid Long accountId, DeleteAccountRequest deleteAccountRequest) throws Exception {
 
         Account existingAccount = getAccountById(accountId);
 

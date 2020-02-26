@@ -16,8 +16,9 @@ import javax.persistence.*;
 @Table(name="account")
 public class Account {
     @Id
+    @GeneratedValue (strategy = GenerationType.AUTO)
     @Column(name="account_id", unique = true, nullable = false)
-    private String accountId;
+    private Long accountId;
 
     @Column(name="last_name")
     private String lastName;
@@ -27,11 +28,11 @@ public class Account {
 
 //    public Account() {}
 
-    public String getAccountId() {
+    public Long getAccountId() {
         return accountId;
     }
 
-    public void setAccountId (String accountId) {
+    public void setAccountId (Long accountId) {
         this.accountId = accountId;
     }
 
