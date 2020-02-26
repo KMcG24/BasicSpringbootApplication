@@ -3,6 +3,7 @@ package com.example.Kimberly_McGrath_Santander_SBT_X.controller;
 import com.example.Kimberly_McGrath_Santander_SBT_X.model.Account;
 import com.example.Kimberly_McGrath_Santander_SBT_X.model.AccountRequest;
 import com.example.Kimberly_McGrath_Santander_SBT_X.model.DeleteAccountRequest;
+import com.example.Kimberly_McGrath_Santander_SBT_X.repository.AccountRepository;
 import com.example.Kimberly_McGrath_Santander_SBT_X.service.AccountService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -17,6 +18,7 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 import java.util.List;
+import java.util.Optional;
 
 @RestController
 @RequestMapping(value = "/api", produces = MediaType.APPLICATION_JSON_VALUE)
@@ -28,6 +30,7 @@ public class AccountController {
 
     @Autowired
     AccountService accountService;
+    AccountRepository accountRepository;
 
 
     /**
