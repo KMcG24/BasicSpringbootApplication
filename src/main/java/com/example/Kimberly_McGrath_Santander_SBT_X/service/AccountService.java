@@ -11,6 +11,7 @@ import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
+import javax.validation.ConstraintViolationException;
 import javax.validation.Valid;
 import java.util.*;
 
@@ -46,32 +47,25 @@ public class AccountService {
 
     public Account updateAccountbyId(Long accountId, AccountRequest accountRequest) throws Exception {
 
-//        get account being passed
             Account existingAccount = getAccountById(accountId);
             System.out.println("I am getting the account :" + existingAccount);
 
+            if (existingAccount != null) {
+                existingAccount.setLastName(accountRequest.getLastName());
+                existingAccount.setPhoneNumber(accountRequest.getPhoneNumber());
 
-//            check to make sure it is not null
-        if (existingAccount != null) {
-            System.out.println("I am checking the correct accountId " + accountId);
+                System.out.println("last name " + existingAccount.getLastName());
+                System.out.println("phone number " + existingAccount.getPhoneNumber());
 
-            Account updatedAccount = new Account();
-//            existingAccount.setAccountId(accountRequest.getAccountId());
-            existingAccount.setLastName(accountRequest.getLastName());
-            existingAccount.setPhoneNumber(accountRequest.getPhoneNumber());
+                final Account updatedAccount = accountRepository.save(existingAccount);
+                System.out.println("updated account info: " + updatedAccount);
 
-//            System.out.println("account id" + existingAccount.getAccountId());
-            System.out.println("last name " + existingAccount.getLastName());
-            System.out.println("phone number " + existingAccount.getPhoneNumber());
+                return updatedAccount;
 
-            final Account newAccount = accountRepository.save(updatedAccount);
-
-            return newAccount;
-
-        } else {
-            throw new Exception("Error updating account");
-        }
-        }
+            } else {
+                throw new Exception("error updating account");
+            }
+    }
 
 
     public void deleteAccountById(@Valid Long accountId, DeleteAccountRequest deleteAccountRequest) throws Exception {

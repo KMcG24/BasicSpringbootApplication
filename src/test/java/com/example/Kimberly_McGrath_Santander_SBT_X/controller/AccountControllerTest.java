@@ -59,10 +59,10 @@ public class AccountControllerTest {
 //
 //        Account account = new Account();
 //
-//        String accountId = "1";
+//        Long accountId = 1l;
 //        String lastName = "Jones";
 //        String phoneNumber = "07785746345";
-//
+
 //        when(accountService.getAccountById(accountId)).thenReturn(account);
 //
 //        mockMvc.perform(
