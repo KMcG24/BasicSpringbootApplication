@@ -47,10 +47,18 @@ public class AccountService {
 
     public Account updateAccountbyId(Long accountId, Account account) throws Exception {
 
+        Account existingAccount = getAccountById(accountId);
+
+        if (existingAccount != null) {
         account.setAccountId(accountId);
         return accountRepository.save(account);
 
+    } else {
+        throw new Exception("Could not update account");
+
     }
+
+}
 
 
     public void deleteAccountById(@Valid Long accountId, DeleteAccountRequest deleteAccountRequest) throws Exception {

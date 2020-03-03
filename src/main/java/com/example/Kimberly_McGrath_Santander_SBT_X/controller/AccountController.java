@@ -42,7 +42,7 @@ public class AccountController {
 
     @GetMapping(path = "/account/{accountId}", produces = MediaType.APPLICATION_JSON_VALUE)
     @ResponseBody
-    public ResponseEntity<Object> getAccountById(@Valid @PathVariable Long accountId) throws Exception {
+    public ResponseEntity<Object> getAcctById(@Valid @PathVariable Long accountId) throws Exception {
 
         return new ResponseEntity<Object>(accountService.getAccountById(accountId), HttpStatus.OK);
     }
@@ -57,12 +57,16 @@ public class AccountController {
     @PatchMapping (path = "/account/update/{accountId}", produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<Account> updateAcctById(@PathVariable Long accountId,
                                                   @Valid @RequestBody Account account) throws Exception {
-        accountService.updateAccountbyId(accountId, account);
-        return new ResponseEntity<Account>(HttpStatus.OK);
+        try {
+            accountService.updateAccountbyId(accountId, account);
+            return new ResponseEntity<Account>(HttpStatus.OK);
+        } catch (Exception e){
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(null);
+        }
     }
 
     @DeleteMapping(path = "/account/delete/{accountId}", produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<Object> deleteAccountById (@Valid @PathVariable Long accountId,
+    public ResponseEntity<Object> deleteAcctById (@Valid @PathVariable Long accountId,
                                                      @Valid @RequestBody DeleteAccountRequest deleteAccountRequest) throws Exception {
         accountService.deleteAccountById(accountId, deleteAccountRequest);
         LOGGER.info("Account " + accountId + " deleted successfully");
