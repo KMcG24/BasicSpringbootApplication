@@ -55,11 +55,8 @@ public class AccountService {
 
     } else {
         throw new Exception("Could not update account");
-
+        }
     }
-
-}
-
 
     public void deleteAccountById(@Valid Long accountId, DeleteAccountRequest deleteAccountRequest) throws Exception {
 
@@ -68,8 +65,6 @@ public class AccountService {
         if (existingAccount != null) ;
         accountRepository.deleteById(accountId);
     }
-
-
 }
 
 
