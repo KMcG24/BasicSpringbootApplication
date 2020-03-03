@@ -36,20 +36,20 @@ import static org.springframework.util.MimeTypeUtils.APPLICATION_JSON;
 @WebMvcTest(controllers = AccountController.class)
 public class AccountControllerTest {
 
-    private MockMvc mockMvc;
+//    private MockMvc mockMvc;
 
 //    @InjectMocksectMocks
 //    private AccountController accountController;
 
-    @Mock
-    private AccountService accountService;
-
-    @Mock
-    private AccountRepository accountRepository;
-
-    @Mock
-    private Account account;
-    private List accountList;
+//    @Mock
+//    private AccountService accountService;
+//
+//    @Mock
+//    private AccountRepository accountRepository;
+//
+//    @Mock
+//    private Account account;
+//    private List accountList;
 
 //    @Spy
 //    private List<Object> accountList = new List<>();

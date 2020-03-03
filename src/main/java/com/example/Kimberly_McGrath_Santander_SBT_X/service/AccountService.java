@@ -45,26 +45,11 @@ public class AccountService {
         }
     }
 
-    public Account updateAccountbyId(Long accountId, AccountRequest accountRequest) throws Exception {
+    public Account updateAccountbyId(Long accountId, Account account) throws Exception {
 
-            Account existingAccount = getAccountById(accountId);
-            System.out.println("I am getting the account :" + existingAccount);
+        account.setAccountId(accountId);
+        return accountRepository.save(account);
 
-            if (existingAccount != null) {
-                existingAccount.setLastName(accountRequest.getLastName());
-                existingAccount.setPhoneNumber(accountRequest.getPhoneNumber());
-
-                System.out.println("last name " + existingAccount.getLastName());
-                System.out.println("phone number " + existingAccount.getPhoneNumber());
-
-                final Account updatedAccount = accountRepository.save(existingAccount);
-                System.out.println("updated account info: " + updatedAccount);
-
-                return updatedAccount;
-
-            } else {
-                throw new Exception("error updating account");
-            }
     }
 
 
