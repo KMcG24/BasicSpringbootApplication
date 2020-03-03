@@ -2,62 +2,69 @@ package com.example.Kimberly_McGrath_Santander_SBT_X.service;
 
 import com.example.Kimberly_McGrath_Santander_SBT_X.model.Account;
 import com.example.Kimberly_McGrath_Santander_SBT_X.model.AccountRequest;
+import com.example.Kimberly_McGrath_Santander_SBT_X.model.DeleteAccountRequest;
 import com.example.Kimberly_McGrath_Santander_SBT_X.repository.AccountRepository;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Service;
 
-import java.util.List;
-import java.util.Optional;
+import javax.transaction.Transactional;
+import javax.validation.ConstraintViolationException;
+import javax.validation.Valid;
+import java.util.*;
 
-
+@Service
 @Component
+@Transactional
 public class AccountService {
     private static final Logger LOGGER = LoggerFactory.getLogger(AccountService.class);
 
     @Autowired
     private AccountRepository accountRepository;
 
-    public Account getAccountById(String accountId) throws Exception {
+    public Account getAccountById(Long accountId) throws Exception {
 
         Optional<Account> accountOptional = accountRepository.findById(accountId);
         if (accountOptional.isPresent()) {
             return accountOptional.get();
         } else {
-            throw new Exception ("Account not found");
+            throw new Exception("Account not found");
         }
-   }
+    }
 
-    public List getAccounts() throws Exception{
+    public List getAccounts() throws Exception {
 
         List<Account> accountList = (List<Account>) accountRepository.findAll();
         if (!accountList.isEmpty()) {
             return (List) accountList;
 
         } else {
-            throw new Exception ("There are no existing accounts");
+            throw new Exception("There are no existing accounts");
         }
     }
 
-    public void updateAccountbyId(Account accountId, AccountRequest accountRequest) throws Exception {
+    public Account updateAccountbyId(Long accountId, Account account) throws Exception {
 
-        Account updatedAccount = accountRepository.save(accountId);
+        Account existingAccount = getAccountById(accountId);
 
-        if (updatedAccount != null) {
-            accountRepository.save(accountId);
-        } else {
-            throw new Exception("No account to update");
+        if (existingAccount != null) {
+        account.setAccountId(accountId);
+        return accountRepository.save(account);
+
+    } else {
+        throw new Exception("Could not update account");
         }
     }
 
-//    public Account deleteAccountById(String accountId) throws Exception {
-//
-//        void <Account> account = accountRepository.deleteById(accountId);
-//        if (account!=null) {
-//            return account;
-//        } else {
-//            throw new Exception ("Account not found");
-//        }
+    public void deleteAccountById(@Valid Long accountId, DeleteAccountRequest deleteAccountRequest) throws Exception {
+
+        Account existingAccount = getAccountById(accountId);
+
+        if (existingAccount != null) ;
+        accountRepository.deleteById(accountId);
     }
+}
+
 

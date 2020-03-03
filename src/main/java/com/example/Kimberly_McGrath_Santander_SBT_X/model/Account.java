@@ -5,10 +5,8 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.management.relation.Role;
+import javax.persistence.*;
 
 
 @Data
@@ -18,8 +16,9 @@ import javax.persistence.Table;
 @Table(name="account")
 public class Account {
     @Id
-    @Column(name="account_id")
-    private String accountId;
+    @GeneratedValue (strategy = GenerationType.IDENTITY)
+    @Column(name="account_id", unique = true, nullable = false)
+    private Long accountId;
 
     @Column(name="last_name")
     private String lastName;
@@ -28,6 +27,32 @@ public class Account {
     private String phoneNumber;
 
 //    public Account() {}
+
+    public Long getAccountId() {
+        return accountId;
+    }
+
+    public void setAccountId (Long accountId) {
+        this.accountId = accountId;
+    }
+
+    public String getLastName() {
+        return lastName;
+    }
+
+    public void setLastName (String lastName) {
+        this.lastName = lastName;
+    }
+
+    public String getPhoneNumber() {
+        return phoneNumber;
+    }
+
+    public void setPhoneNumber (String phoneNumber) {
+        this.phoneNumber = phoneNumber;
+    }
+
+
 
     @Override
     public String toString() {
