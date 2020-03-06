@@ -15,6 +15,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Component;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 
 import javax.validation.Valid;
 import java.util.List;
@@ -24,6 +25,7 @@ import java.util.Optional;
 @RequestMapping(value = "/api", produces = MediaType.APPLICATION_JSON_VALUE)
 @Validated
 @Component
+@EnableWebMvc
 
 public class AccountController {
     private static final Logger LOGGER = LoggerFactory.getLogger(AccountController.class);
