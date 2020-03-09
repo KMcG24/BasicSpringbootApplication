@@ -9,21 +9,28 @@ import org.junit.Before;
 import org.junit.Test;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.runner.RunWith;
+import org.junit.runners.Parameterized;
 import org.mockito.*;
 import org.mockito.junit.MockitoJUnitRunner;
 import org.mockito.stubbing.Answer;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.test.web.client.ExpectedCount;
+import org.springframework.test.web.client.MockRestServiceServer;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
+import org.springframework.web.client.RestTemplate;
 import org.springframework.web.util.UriComponents;
 import org.springframework.web.util.UriComponentsBuilder;
 //import import com.santanderuk.levelup.unitTests.utils.TestUtils;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -47,6 +54,9 @@ public class AccountControllerTest {
 
     private MockMvc mockMvc;
 
+    @Autowired
+    private RestTemplate restTemplate;
+
     @Mock
     private AccountService accountService;
 
@@ -61,8 +71,8 @@ public class AccountControllerTest {
     @InjectMocks
     private AccountController accountController;
 
-//    @Spy
-//    private List<Object> accountList = new List<>();
+    @Mock
+    List<String> mockedAccountList;
 
     @Before
     public void setup() throws Exception {
@@ -87,25 +97,37 @@ public class AccountControllerTest {
                 .andExpect(MockMvcResultMatchers.content().contentType("application/json"));
     }
 
-//    @Test
-//    public void getAllAccts_shouldReturnAllAccounts() throws Exception {
-//        List accountList = Mockito.mock(List.class);
-//        when(accountService.getAccounts().thenReturn(accountList));
-//        MockMvc.perform(
-//        .contentTypeMedia(APPLICATION_JSON)
-//                .accept("application/json")
-//                .andExpect(MockMvcResultMatchers.status().isOk())
-//                .andExpect(MockMvcResultMatchers.content().contentType(MediaType.APPLICATION_JSON));
-//    }
+    @Test
+    public void getAllAccts_shouldReturnAllAccounts() throws Exception {
+
+        String url = "http://localhost:8090/api/account";
+
+        List accountList = new ArrayList();
+
+        Mockito.doReturn(accountList).when(accountService).getAccounts();
+
+        this.mockMvc.perform(
+                MockMvcRequestBuilders.get(url)
+                        .accept(MediaType.parseMediaType("application/json")))
+                .andDo(print())
+                .andExpect(MockMvcResultMatchers.status().isOk())
+                .andExpect(MockMvcResultMatchers.content().contentType("application/json"));
+    }
 
     @Test
     public void updateAcctById_shouldUpdateAccount() throws Exception {
 
-        Account account = new Account();
-
         String url = "http://localhost:8090/api/account/update/1";
+        Account account = new Account();
+        Long accountId = 1L;
+        String lastName = "Jones";
+        String phoneNumber = "0239200039";
 
-        when(accountService.updateAccountbyId(1L, account)).thenReturn(account);
+
+        Account updatedAccount = new Account();
+
+
+        when(accountService.updateAccountbyId(1L, account)).thenReturn(updatedAccount);
 
         this.mockMvc.perform(
                 MockMvcRequestBuilders.patch(url)
@@ -119,10 +141,11 @@ public class AccountControllerTest {
 //    @Test
 //    public void whenDeleteAllById_ShouldDeleteAccount() throws Exception{
 //
-//        Account account = new Account();
-//        DeleteAccountRequest deleteAccountRequest = new DeleteAccountRequest();
-//
 //        String url = "http://localhost:8090/api/account/delete/1";
+//
+//        Account account = new Account();
+//        DeleteAccountRequest deleteAccountRequest = new DeleteAccountRequest()
+//                .getAsObject(url, DeleteAccountRequest.class);
 //
 //        when(accountService.deleteAccountById(1L, DeleteAccountRequest)).thenReturn(DeleteAccountRequest);
 //
@@ -131,11 +154,11 @@ public class AccountControllerTest {
 //                .accept(MediaType.parseMediaType("application/json")))
 //                .andDo(print())
 //                .andExpect(MockMvcResultMatchers.status().isNoContent());
-//
-////                .contentType(MediaType.APPLICATION_JSON))
-////                .andExpect(MockMvcResultMatchers.status().isNoContent());
-//               // .andExpect(MockMvcResultMatchers.content().contentType(MediaType.APPLICATION_JSON)); //is this necessary as it is a no content return?
-//
-//      //  accountRepository.deleteById(accountId);
+
+//                .contentType(MediaType.APPLICATION_JSON))
+//                .andExpect(MockMvcResultMatchers.status().isNoContent());
+               // .andExpect(MockMvcResultMatchers.content().contentType(MediaType.APPLICATION_JSON)); //is this necessary as it is a no content return?
+
+      //  accountRepository.deleteById(accountId);
 //    }
 }
