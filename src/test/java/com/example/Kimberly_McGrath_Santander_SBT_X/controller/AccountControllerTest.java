@@ -22,6 +22,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.test.web.client.ExpectedCount;
 import org.springframework.test.web.client.MockRestServiceServer;
 import org.springframework.test.web.servlet.MockMvc;
+import org.springframework.test.web.servlet.request.MockHttpServletRequestBuilder;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
@@ -118,16 +119,21 @@ public class AccountControllerTest {
     public void updateAcctById_shouldUpdateAccount() throws Exception {
 
         String url = "http://localhost:8090/api/account/update/1";
-        Account account = new Account();
-        Long accountId = 1L;
-        String lastName = "Jones";
-        String phoneNumber = "0239200039";
 
+//        ResponseEntity res = accountController.updateAcctById(1L, account);
+
+//        Account account = new Account();
 
         Account updatedAccount = new Account();
+        updatedAccount.setAccountId(1L);
+        updatedAccount.setLastName("Jones");
+        updatedAccount.setPhoneNumber("33048039");
+        System.out.println(updatedAccount);
 
+//        Mockito.doReturn(updatedAccount).when(accountService).getAccountById(1L);
 
-        when(accountService.updateAccountbyId(1L, account)).thenReturn(updatedAccount);
+          when(accountService.getAccountById(1L)).thenReturn(updatedAccount);
+      //  when(accountService.updateAccountbyId(1L, account)).thenReturn(updatedAccount);
 
         this.mockMvc.perform(
                 MockMvcRequestBuilders.patch(url)

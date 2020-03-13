@@ -14,16 +14,13 @@ import javax.persistence.*;
 public class AccountRequest {
 
     @Id
-//    @OneToOne(fetch = FetchType.LAZY)
-//    @JoinColumn (name = "account_id")
     private Long accountId;
 
     private String lastName;
 
     private String phoneNumber;
 
-    public AccountRequest (String accountId, String lastName, String phoneNumber) {
-
+    public AccountRequest (Long accountId, String lastName, String phoneNumber) {
     }
 
     public Long getAccountId() {
