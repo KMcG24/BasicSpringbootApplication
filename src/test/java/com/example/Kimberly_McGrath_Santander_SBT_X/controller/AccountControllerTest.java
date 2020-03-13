@@ -115,33 +115,37 @@ public class AccountControllerTest {
                 .andExpect(MockMvcResultMatchers.content().contentType("application/json"));
     }
 
-    @Test
-    public void updateAcctById_shouldUpdateAccount() throws Exception {
-
-        String url = "http://localhost:8090/api/account/update/1";
-
-//        ResponseEntity res = accountController.updateAcctById(1L, account);
-
+//    @Test
+//    public void updateAcctById_shouldUpdateAccount() throws Exception {
+//
+//        String url = "http://localhost:8090/api/account/update/1";
+//
 //        Account account = new Account();
-
-        Account updatedAccount = new Account();
-        updatedAccount.setAccountId(1L);
-        updatedAccount.setLastName("Jones");
-        updatedAccount.setPhoneNumber("33048039");
-        System.out.println(updatedAccount);
-
-//        Mockito.doReturn(updatedAccount).when(accountService).getAccountById(1L);
-
-          when(accountService.getAccountById(1L)).thenReturn(updatedAccount);
-      //  when(accountService.updateAccountbyId(1L, account)).thenReturn(updatedAccount);
-
-        this.mockMvc.perform(
-                MockMvcRequestBuilders.patch(url)
-                        .accept(MediaType.parseMediaType("application/json")))
-                .andDo(print())
-                .andExpect(MockMvcResultMatchers.status().isOk())
-                .andExpect(MockMvcResultMatchers.content().contentType("application/json"));
-    }
+//        //mimic object in postman
+//        account.setLastName("Smith");
+//        account.setPhoneNumber("07943437564");
+//
+//        Account updatedAccount = new Account();
+//        updatedAccount.setAccountId(1L);
+//        updatedAccount.setLastName("Jones");
+//        updatedAccount.setPhoneNumber("33048039");
+//        System.out.println(updatedAccount);
+//
+////        Mockito.doReturn(updatedAccount).when(accountService).getAccountById(1L);
+//
+//          when(accountService.getAccountById(1L)).thenReturn(updatedAccount);
+//      //  when(accountService.updateAccountbyId(1L, account)).thenReturn(updatedAccount);
+//
+//        this.mockMvc.perform(
+//                MockMvcRequestBuilders.patch(url)
+//                        .accept(MediaType.parseMediaType("application/json"))
+//        .contentType(MediaType.APPLICATION_JSON)
+//        .content())
+//                //convert to string and pass mimicked object
+//                .andDo(print())
+//                .andExpect(MockMvcResultMatchers.status().isOk())
+//                .andExpect(MockMvcResultMatchers.content().contentType("application/json"));
+//    }
 
 
 //    @Test

@@ -48,14 +48,19 @@ public class AccountService {
     public Account updateAccountbyId(Long accountId, Account account) throws Exception {
 
         Account existingAccount = getAccountById(accountId);
+        existingAccount.getAccountId();
+        existingAccount.getLastName();
+        existingAccount.getPhoneNumber();
 
-        if (existingAccount != null) {
-        account.setAccountId(accountId);
-        return accountRepository.save(account);
+        if (existingAccount.getAccountId() != null) {
 
-    } else {
-        throw new Exception("Could not update account");
+        } if (existingAccount.getLastName() != null) {
+            existingAccount.setLastName(account.getLastName());
+
+        } if (existingAccount.getPhoneNumber() != null ) {
+            existingAccount.setPhoneNumber(account.getPhoneNumber());
         }
+        return accountRepository.save(existingAccount);
     }
 
     public void deleteAccountById(@Valid Long accountId, DeleteAccountRequest deleteAccountRequest) throws Exception {
