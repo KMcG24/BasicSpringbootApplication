@@ -5,6 +5,8 @@ import com.example.Kimberly_McGrath_Santander_SBT_X.model.AccountRequest;
 import com.example.Kimberly_McGrath_Santander_SBT_X.model.DeleteAccountRequest;
 import com.example.Kimberly_McGrath_Santander_SBT_X.repository.AccountRepository;
 import com.example.Kimberly_McGrath_Santander_SBT_X.service.AccountService;
+import net.minidev.json.JSONObject;
+import org.hamcrest.Matcher;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.jupiter.api.BeforeEach;
@@ -36,11 +38,13 @@ import java.util.List;
 import java.util.Optional;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.mockito.ArgumentMatchers.argThat;
+import static org.mockito.ArgumentMatchers.eq;
+import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.when;
 import static org.springframework.test.web.client.match.MockRestRequestMatchers.content;
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.request;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 import static org.springframework.test.web.servlet.setup.MockMvcBuilders.standaloneSetup;
 import static org.springframework.util.MimeTypeUtils.APPLICATION_JSON;
 
@@ -115,37 +119,40 @@ public class AccountControllerTest {
                 .andExpect(MockMvcResultMatchers.content().contentType("application/json"));
     }
 
-//    @Test
-//    public void updateAcctById_shouldUpdateAccount() throws Exception {
-//
-//        String url = "http://localhost:8090/api/account/update/1";
-//
-//        Account account = new Account();
-//        //mimic object in postman
-//        account.setLastName("Smith");
-//        account.setPhoneNumber("07943437564");
-//
-//        Account updatedAccount = new Account();
-//        updatedAccount.setAccountId(1L);
-//        updatedAccount.setLastName("Jones");
-//        updatedAccount.setPhoneNumber("33048039");
-//        System.out.println(updatedAccount);
-//
-////        Mockito.doReturn(updatedAccount).when(accountService).getAccountById(1L);
-//
-//          when(accountService.getAccountById(1L)).thenReturn(updatedAccount);
-//      //  when(accountService.updateAccountbyId(1L, account)).thenReturn(updatedAccount);
-//
-//        this.mockMvc.perform(
-//                MockMvcRequestBuilders.patch(url)
-//                        .accept(MediaType.parseMediaType("application/json"))
-//        .contentType(MediaType.APPLICATION_JSON)
-//        .content())
-//                //convert to string and pass mimicked object
-//                .andDo(print())
-//                .andExpect(MockMvcResultMatchers.status().isOk())
-//                .andExpect(MockMvcResultMatchers.content().contentType("application/json"));
-//    }
+    @Test
+    public void updateAcctById_shouldUpdateAccount() throws Exception {
+
+        String url = "http://localhost:8090/api/account/update/1";
+
+        Account account = new Account();
+        //mimic object in postman
+        account.setAccountId(1L);
+        account.setLastName("Smith");
+        account.setPhoneNumber("07943437564");
+
+        Account updatedAccount = new Account();
+        updatedAccount.setAccountId(1L);
+        updatedAccount.setLastName("Jones");
+        updatedAccount.setPhoneNumber("33048039");
+        System.out.println(updatedAccount);
+
+          when(accountService.getAccountById(1L)).thenReturn(updatedAccount);
+
+//        String requestJson=ow.writeValueAsString(anObject );
+
+        this.mockMvc.perform(
+                MockMvcRequestBuilders.patch(url)
+                        .accept(MediaType.parseMediaType("application/json"))
+        .contentType(MediaType.APPLICATION_JSON)
+//                        .content(updatedAccount.toString()))
+        .content(toString(updatedAccount)))
+                //convert to string and pass mimicked object
+                .andDo(print())
+//                .andExpect(content().json{'message':'ok'})
+                .andExpect(MockMvcResultMatchers.status().isOk())
+                .andExpect(MockMvcResultMatchers.content().contentType("application/json"));
+    }
+
 
 
 //    @Test
@@ -153,22 +160,21 @@ public class AccountControllerTest {
 //
 //        String url = "http://localhost:8090/api/account/delete/1";
 //
-//        Account account = new Account();
-//        DeleteAccountRequest deleteAccountRequest = new DeleteAccountRequest()
-//                .getAsObject(url, DeleteAccountRequest.class);
+////        Account account = new Account();
 //
-//        when(accountService.deleteAccountById(1L, DeleteAccountRequest)).thenReturn(DeleteAccountRequest);
-//
+//        DeleteAccountRequest deleteAccountRequest = new DeleteAccountRequest();
+
+//        final DeleteAccountRequest deleteAccountRequest = (DeleteAccountRequest) TestUtils
+//                .getAsObject("/deleteAccountRequest.json", DeleteAccountRequest.class);
+
 //        mockMvc.perform(
 //                MockMvcRequestBuilders.delete(url)
 //                .accept(MediaType.parseMediaType("application/json")))
 //                .andDo(print())
-//                .andExpect(MockMvcResultMatchers.status().isNoContent());
-
-//                .contentType(MediaType.APPLICATION_JSON))
-//                .andExpect(MockMvcResultMatchers.status().isNoContent());
-               // .andExpect(MockMvcResultMatchers.content().contentType(MediaType.APPLICATION_JSON)); //is this necessary as it is a no content return?
-
-      //  accountRepository.deleteById(accountId);
+//                .andExpect(MockMvcResultMatchers.status().isNoContent())
+//                .andExpect(jsonPath("$.httpCode", is(HttpStatus.NO_CONTENT.value())));
+//
+//        Mockito.verify(accountService, times(1)).deleteAccountById(1L, deleteAccountRequest);
+//
 //    }
 }
