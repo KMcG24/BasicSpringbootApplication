@@ -19,7 +19,7 @@ import java.util.*;
 @Component
 @Transactional
 public class AccountService {
-    private static final Logger LOGGER = LoggerFactory.getLogger(AccountService.class);
+    private static Logger LOGGER = LoggerFactory.getLogger(AccountService.class);
 
     @Autowired
     private AccountRepository accountRepository;

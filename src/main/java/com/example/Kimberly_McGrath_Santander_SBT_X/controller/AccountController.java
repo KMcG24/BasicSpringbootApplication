@@ -28,7 +28,7 @@ import java.util.Optional;
 @EnableWebMvc
 
 public class AccountController {
-    private static final Logger LOGGER = LoggerFactory.getLogger(AccountController.class);
+    private static Logger LOGGER = LoggerFactory.getLogger(AccountController.class);
 
     @Autowired
     AccountService accountService;
