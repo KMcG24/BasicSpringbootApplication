@@ -34,19 +34,6 @@ public class AccountServiceTest {
 
     private List accountList;
 
-
-//    @Before
-//    public void setup() {
-//        dataTest.setSecurityContext(USERNAME_C0238943);
-//        user = (User) TestUtils.getAsObject("user/user.json", User.class);
-//        userRequest = (UserRequest) TestUtils.getAsObject("user/userRequest.json", UserRequest.class);
-//        deleteUserRequest = (DeleteUserRequest) TestUtils.getAsObject("user/deleteUserRequest.json", DeleteUserRequest.class);
-//        user_E0607001 = (User) TestUtils.getAsObject("user/userChannels.json", User.class);
-//        mentor = (Mentoring) TestUtils.getAsObject("mentoring/mentor.json", Mentoring.class);
-//        mentee = (Mentoring) TestUtils.getAsObject("mentoring/mentee.json", Mentoring.class);
-//    }
-
-
     @Test
     public void findById_ShouldFindAccountById() throws Exception {
 
@@ -81,15 +68,13 @@ public class AccountServiceTest {
         account3.setLastName("Martin");
         account3.setPhoneNumber("33333333");
 
-        Mockito.doReturn(accountList).when(accountService.getAccounts());
 
         final List<Account> accountList = new ArrayList<>();
         accountList.add(account1);
         accountList.add(account2);
         accountList.add(account3);
 
-         Mockito.lenient().when((accountRepository.findAll()).thenReturn(accountList));
-//        Mockito.doReturn((accountList).when(accountRepository.findAll()));
+        Mockito.lenient().when(accountRepository.findAll()).thenReturn(accountList);
 
         final List<Account> result = accountService.getAccounts();
         Assert.assertEquals(accountList, result);
@@ -108,9 +93,24 @@ public class AccountServiceTest {
         updatedAccount.setLastName("Jones");
         updatedAccount.setPhoneNumber("9999900000");
 
-        Mockito.lenient().when((accountRepository.save(account)).thenReturn(updatedAccount));
-
+        Mockito.lenient().when(accountRepository.save(account)).thenReturn(updatedAccount);
         }
+
+//        @Test
+//        public void deleteAccount_ShouldDeleteAccount() throws Exception {
+//            Account account = new Account();
+//            account.setAccountId(1L);
+//            account.setLastName("Frank");
+//            account.setPhoneNumber("99999999999");
+//
+//            Mockito.lenient().when(accountRepository.deleteById(1L)).thenReturn(null);
+//
+//            final Account expected = accountService.deleteAccountById(1L, deleteAccountRequest);
+//
+//            Assert.assertEquals(expected, account);
+//            Mockito.verify(accountRepository, times(1)).deleteById(1L);
+//
+//        }
 
     }
 
