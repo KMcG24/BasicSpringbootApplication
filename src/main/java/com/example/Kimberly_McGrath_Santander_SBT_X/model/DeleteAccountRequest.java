@@ -16,4 +16,5 @@ public class DeleteAccountRequest {
 
     @Id
     private Long accountId;
+
 }

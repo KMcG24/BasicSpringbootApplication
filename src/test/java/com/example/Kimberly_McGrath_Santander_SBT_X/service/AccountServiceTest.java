@@ -1,6 +1,7 @@
 package com.example.Kimberly_McGrath_Santander_SBT_X.service;
 
 import com.example.Kimberly_McGrath_Santander_SBT_X.model.Account;
+import com.example.Kimberly_McGrath_Santander_SBT_X.model.DeleteAccountRequest;
 import com.example.Kimberly_McGrath_Santander_SBT_X.repository.AccountRepository;
 import javafx.util.Builder;
 import org.junit.Assert;
@@ -17,8 +18,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-import static org.mockito.Mockito.times;
-import static org.mockito.Mockito.when;
+import static org.mockito.Mockito.*;
 
 @RunWith(MockitoJUnitRunner.class)
 
@@ -96,21 +96,30 @@ public class AccountServiceTest {
         Mockito.lenient().when(accountRepository.save(account)).thenReturn(updatedAccount);
         }
 
-//        @Test
-//        public void deleteAccount_ShouldDeleteAccount() throws Exception {
-//            Account account = new Account();
-//            account.setAccountId(1L);
-//            account.setLastName("Frank");
-//            account.setPhoneNumber("99999999999");
+        @Test
+        public void deleteAccount_ShouldDeleteAccount() throws Exception {
+            Account account = new Account();
+            account.setAccountId(1L);
+            account.setLastName("Frank");
+            account.setPhoneNumber("99999999999");
+
+            DeleteAccountRequest deleteAccountRequest = new DeleteAccountRequest();
+//            DeleteAccountRequest.setAccountId(1L);
+            //give this object the accountId?
+
+            accountService.deleteAccountById(1L, deleteAccountRequest);
+            Assert.assertEquals(1L, 1L);
+            verify(accountRepository, times (1)).deleteById(1L);
 //
 //            Mockito.lenient().when(accountRepository.deleteById(1L)).thenReturn(null);
 //
 //            final Account expected = accountService.deleteAccountById(1L, deleteAccountRequest);
-//
+////
 //            Assert.assertEquals(expected, account);
 //            Mockito.verify(accountRepository, times(1)).deleteById(1L);
-//
+
 //        }
+        }
 
     }
 
