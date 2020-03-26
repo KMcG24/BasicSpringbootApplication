@@ -5,6 +5,7 @@ import com.example.Kimberly_McGrath_Santander_SBT_X.model.AccountRequest;
 import com.example.Kimberly_McGrath_Santander_SBT_X.model.DeleteAccountRequest;
 import com.example.Kimberly_McGrath_Santander_SBT_X.repository.AccountRepository;
 import com.example.Kimberly_McGrath_Santander_SBT_X.service.AccountService;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -22,6 +23,7 @@ import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import org.springframework.web.client.RestTemplate;
 //import import com.santanderuk.levelup.unitTests.utils.TestUtils;
 
+import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -64,7 +66,8 @@ public class AccountControllerTest {
     @Before
     public void setup() throws Exception {
         MockitoAnnotations.initMocks(this);
-        mockMvc = MockMvcBuilders.standaloneSetup(accountController).setControllerAdvice(new Exception()).build();
+//        mockMvc = MockMvcBuilders.standaloneSetup(accountController).setControllerAdvice(new Exception()).build();
+        mockMvc = MockMvcBuilders.standaloneSetup(new AccountController()).build();
     }
 
     @Test
@@ -107,7 +110,6 @@ public class AccountControllerTest {
         String url = "http://localhost:8090/api/account/update/1";
 
         Account account = new Account();
-        //mimic object in postman
         account.setAccountId(1L);
         account.setLastName("Smith");
         account.setPhoneNumber("07943437564");
@@ -120,11 +122,14 @@ public class AccountControllerTest {
 
           when(accountService.getAccountById(1L)).thenReturn(updatedAccount);
 
+        ObjectMapper objectMapper = new ObjectMapper();
+        String accountAsString = objectMapper.writeValueAsString(updatedAccount);
+
         this.mockMvc.perform(
                 MockMvcRequestBuilders.patch(url)
                         .accept(MediaType.parseMediaType("application/json"))
         .contentType(MediaType.APPLICATION_JSON)
-        .content(String.valueOf(account)))
+        .content(accountAsString))
                 //convert to string and pass mimicked object
                 .andDo(print())
                 .andExpect(MockMvcResultMatchers.status().isOk())
